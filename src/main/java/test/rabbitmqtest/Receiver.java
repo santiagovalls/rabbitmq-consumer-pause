@@ -8,6 +8,10 @@ public class Receiver {
     this.name = name;
   }
 
+  public void receiveMessage(String message) {
+    System.out.println("Receiver <" + name + "> - Received <" + message + ">");
+  }
+
   public void receiveMessage(byte[] message) {
     System.out.println("Receiver <" + name + "> - Received <" + new String(message) + ">");
   }

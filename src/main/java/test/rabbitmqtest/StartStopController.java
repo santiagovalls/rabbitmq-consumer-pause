@@ -1,5 +1,6 @@
 package test.rabbitmqtest;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,6 +14,9 @@ public class StartStopController {
   @Qualifier("containerPause")
   SimpleMessageListenerContainer container;
 
+  @Autowired
+  RabbitTemplate rabbitTemplate;
+
   @RequestMapping("/startConsumer")
   public String startConsumer() {
     container.start();
@@ -23,5 +27,11 @@ public class StartStopController {
   public String stopConsumer() {
     container.stop();
     return "stopConsumer";
+  }
+
+  @RequestMapping("/publishTestMessage")
+  public String publishTestMessage() {
+    rabbitTemplate.convertAndSend(Application.queueName, "Test Message");
+    return "publishTestMessage";
   }
 }
