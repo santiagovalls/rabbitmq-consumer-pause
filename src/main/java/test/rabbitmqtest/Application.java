@@ -40,6 +40,8 @@ public class Application {
     container.setQueueNames(queueName);
     container.setMessageListener(
         new MessageListenerAdapter(new Receiver("containerPause"), "receiveMessage"));
+    container.setConcurrentConsumers(5);
+    container.setMaxConcurrentConsumers(5);
     return container;
   }
 
@@ -51,6 +53,8 @@ public class Application {
     container.setQueueNames(queueName);
     container.setMessageListener(
         new MessageListenerAdapter(new Receiver("container"), "receiveMessage"));
+    container.setConcurrentConsumers(5);
+    container.setMaxConcurrentConsumers(5);
     return container;
   }
 
